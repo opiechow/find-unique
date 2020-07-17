@@ -3,6 +3,7 @@
 /* xXxXxxXxXxX Don't touch from here. xXxXxXxXxXxXxx */
 
 #include <stdio.h>
+#include <limits.h>
 
 #define SAMPLE_SIZE 11
 
@@ -10,7 +11,7 @@ int
 GetNext() {
   static int i = 0;
   static int sample_input[SAMPLE_SIZE] =
-    { 0xf12, 0xea2, 0x684, 0x217, 0xfff, 0x1f5, 0xf12, 0xea2, 0x684, 0xfff, 0x1f5 };
+    { 0xf12, 0xea2, 0x684, INT_MAX, 0xfff, 0x1f5, 0xf12, 0xea2, 0x684, 0xfff, 0x1f5 };
  
   if (i < SAMPLE_SIZE)
       return sample_input[i++];
@@ -25,10 +26,7 @@ GetNext() {
  * Adapted for the task at hand by opiechow \m/
  */
 
-/* Bit count array size optimization -
-    I can see that the oldest bit set in the input is 0x800;
-    So I only need count 12 bits = 3 nibbles */
-#define BITS_NUM 12
+#define BITS_NUM sizeof(int) * 8
 /* Static vars are 0-ed at init, h00ray */
 static int count[BITS_NUM];
 /* Let's add some readabilty */
@@ -76,6 +74,6 @@ int main(void) {
       feed_the_bit_counter(sample);
   }
 
-  printf("Unique val: 0x%x\n", get_teh_result());
+  printf("Unique val: %d == %d\n", get_teh_result(), INT_MAX);
   return 0;
 }
