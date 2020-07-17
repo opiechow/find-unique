@@ -11,7 +11,7 @@ int
 GetNext() {
   static int i = 0;
   static int sample_input[SAMPLE_SIZE] =
-    { 0xf12, 0xea2, 0x684, INT_MAX, 0xfff, 0x1f5, 0xf12, 0xea2, 0x684, 0xfff, 0x1f5 };
+    { 0xf12, 0xea2, 0x684, 12, 0xfff, 0x1f5, 0xf12, 0xea2, 0x684, 0xfff, 0x1f5 };
  
   if (i < SAMPLE_SIZE)
       return sample_input[i++];
@@ -74,6 +74,6 @@ int main(void) {
       feed_the_bit_counter(sample);
   }
 
-  printf("Unique val: %d == %d\n", get_teh_result(), INT_MAX);
+  printf("Unique val: %d\n", get_teh_result());
   return 0;
 }
